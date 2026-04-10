@@ -1,49 +1,33 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
-public class FileSeparator {
+public class Main {
     public static void main(String[] args) {
-        // Step 1: Read from numbers.txt and separate into even.txt and odd.txt
-        // Hint: Use Scanner to read from the file and PrintWriter to write to files.
-        try (Scanner sc = new Scanner(new File("numbers.txt"));
-             PrintWriter evenWriter = new PrintWriter("even.txt");
-             PrintWriter oddWriter = new PrintWriter("odd.txt")) {
-            
-            while (sc.hasNextInt()) {
-                int num = sc.nextInt();
-                if (num % 2 == 0) {
-                    evenWriter.print(num + " ");
-                } else {
-                    oddWriter.print(num + " ");
-                }
-            }
-            
-        } catch (FileNotFoundException e) {
-            System.out.println("Error processing files.");
+        Scanner scanner = new Scanner(System.in);
+           int n = Integer.parseInt(scanner.nextLine());
+        String[] items = scanner.nextLine().split(" ");
+
+        ArrayList<String> list = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            list.add(items[i]);
         }
 
-        // Step 2: Read and display even.txt
-        System.out.print("Even File: ");
-        try (Scanner scEven = new Scanner(new File("even.txt"))) {
-            while (scEven.hasNext()) {
-                System.out.print(scEven.next() + " ");
-            }
-        } catch (FileNotFoundException e) {
-            // Ignore if file doesn't exist (e.g., no even numbers)
-        }
-        System.out.println();
+        // Sort list
+        Collections.sort(list);
 
-        // Step 3: Read and display odd.txt
-        System.out.print("Odd File: ");
-        try (Scanner scOdd = new Scanner(new File("odd.txt"))) {
-            while (scOdd.hasNext()) {
-                System.out.print(scOdd.next() + " ");
-            }
-        } catch (FileNotFoundException e) {
-            // Ignore if file doesn't exist
+        // Search item
+        String searchItem = scanner.nextLine();
+
+        // Output
+        System.out.println("Sorted Items: " + list);
+
+        if (list.contains(searchItem)) {
+            System.out.print("Found");
+        } else {
+            System.out.print("Not Found");
         }
-        System.out.println();
     }
 }
+    
